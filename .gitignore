@@ -1,0 +1,38 @@
+# --- System Files ---
+.DS_Store
+Thumbs.db
+
+# --- Dependencies ---
+# Never commit node_modules; it's huge and can be re-installed via npm install
+node_modules/
+
+# --- Environment & Secrets ---
+# CRITICAL: Do not commit your database passwords or API keys
+.env
+.env.local
+.env.*.local
+
+# --- Build & Output ---
+# This is where your TypeScript compiles to JavaScript
+dist/
+build/
+*.tsbuildinfo
+
+# --- Drizzle ORM ---
+# This folder contains your SQL migration files. 
+# Generally, you DO commit the /drizzle folder if you want to track database history, 
+# BUT if you are just experimenting and want a clean slate, you can ignore it.
+# drizzle/
+
+# --- Logs ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs
+*.log
+
+# --- IDEs ---
+.vscode/
+.idea/
+*.swp
+*.swo
