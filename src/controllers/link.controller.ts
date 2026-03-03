@@ -12,14 +12,22 @@ export const shortenUrl = async (
   res: Response,
 ) => {
   const { url } = req.body;
+
   if (!url) {
     return res.status(400).json({ error: "URL is required!" });
   }
+
   try {
     const slug = nanoid(6);
     const [newLink] = await db.insert(links).values({ url, slug }).returning();
+    const PORT = process.env.PORT || 3000;
+
+    res.status(200).json({
+      shortUrl: `http://localhost:${PORT}/${slug}`,
+      original: newLink.url,
+    });
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
