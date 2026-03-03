@@ -40,12 +40,14 @@ export const redirectUrl = async (req: Request, res: Response) => {
     if (!link) {
       return res.status(404).json({ error: "Link not found" });
     }
-    await db
-      .update(links)
+    db.update(links)
       .set({ clicks: sql`${links.clicks} + 1` })
-      .where(eq(links.id, link.id));
+      .where(eq(links.id, link.id))
+      .execute();
+
+    res.redirect(link.url);
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Server Error" });
+    res.status(500).json({ error: "Server Error" });
   }
 };
