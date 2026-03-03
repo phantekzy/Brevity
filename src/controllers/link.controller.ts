@@ -1,0 +1,5 @@
+
+
+interface ShortenRequestBody {
+    url : string;
+}
