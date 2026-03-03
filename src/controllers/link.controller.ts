@@ -31,3 +31,7 @@ export const shortenUrl = async (
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
+
+export const redirectUrl = async (req: Request, res: Response) => {
+  const { slug } = req.params;
+};
