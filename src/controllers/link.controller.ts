@@ -34,4 +34,9 @@ export const shortenUrl = async (
 
 export const redirectUrl = async (req: Request, res: Response) => {
   const { slug } = req.params;
+  try {
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Server Error" });
+  }
 };
