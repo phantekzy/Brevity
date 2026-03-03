@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use("/", linkRoutes);
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Brevity API live on http://localhost:${PORT}`);
 });
