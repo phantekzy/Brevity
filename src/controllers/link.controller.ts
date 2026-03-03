@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { nanoid } from "nanoid";
 import { db } from "../db";
 import { links } from "../db/schema";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 
 interface ShortenRequestBody {
   url: string;
@@ -40,6 +40,10 @@ export const redirectUrl = async (req: Request, res: Response) => {
     if (!link) {
       return res.status(404).json({ error: "Link not found" });
     }
+    await db
+      .update(links)
+      .set({ clicks: sql`${links.clicks} + 1` })
+      .where(eq(links.id, link.id));
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Server Error" });
