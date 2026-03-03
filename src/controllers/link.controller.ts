@@ -12,4 +12,9 @@ export const shortenUrl = async (
   if (!url) {
     return res.status(400).json({ error: "URL is required!" });
   }
+  try {
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
 };
